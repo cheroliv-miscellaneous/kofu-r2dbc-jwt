@@ -60,7 +60,7 @@ class TokenProvider(
     @Throws(Exception::class)
     override fun afterPropertiesSet() {
         log.info(this.javaClass.simpleName + ".afterPropertiesSet called")
-        init()
+//        init()
     }
 
     fun init() {
