@@ -1,0 +1,22 @@
+# curl -u john:12345 http://localhost:8080/hello
+GET http://localhost:8080/hello
+Authorization: Basic john 12345
+
+###
+GET http://localhost:8080/conf
+Authorization: Basic bill 12345
+
+####
+
+GET http://localhost:8080/
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/hello/
+
+###
+
+GET http://localhost:8080/api/user
+
