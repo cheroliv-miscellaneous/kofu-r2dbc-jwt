@@ -30,9 +30,7 @@ dependencies {
         exclude("org.junit.vintage", "junit-vintage-engine")
     }
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("io.projectreactor:reactor-test")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.security:spring-security-test")
     implementation("io.jsonwebtoken:jjwt-impl:${properties["jsonwebtoken_version"]}")

@@ -125,7 +125,6 @@ class TokenProvider(
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(authToken)
-
             return true
         } catch (e: JwtException) {
             log.info("Invalid JWT token.")
@@ -134,7 +133,6 @@ class TokenProvider(
             log.info("Invalid JWT token.")
             log.trace("Invalid JWT token trace. $e")
         }
-
         return false
     }
 
