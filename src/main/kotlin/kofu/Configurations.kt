@@ -57,7 +57,7 @@ val webConfig = configuration {
                     authorize("/api/user/**", permitAll)
                 }
                 csrf { disable() }
-                val tokenProvider=ref<TokenProvider>("tokenProvider")
+//                val tokenProvider=ref<TokenProvider>("tokenProvider")
             }
             passwordEncoder = BCryptPasswordEncoder()
             userDetailsService = MapReactiveUserDetailsService(

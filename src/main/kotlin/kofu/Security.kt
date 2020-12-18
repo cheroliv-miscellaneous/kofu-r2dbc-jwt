@@ -19,13 +19,14 @@ import io.jsonwebtoken.jackson.io.JacksonSerializer
 import io.jsonwebtoken.security.Keys
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
-import org.springframework.core.env.getProperty
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import java.util.Date
 
 import org.springframework.security.core.context.ReactiveSecurityContextHolder.getContext
+import org.springframework.util.StringUtils
+import org.springframework.util.StringUtils.hasLength
 import org.springframework.util.StringUtils.isEmpty
 import org.springframework.web.server.ServerWebExchange
 import org.springframework.web.server.WebFilter
@@ -47,8 +48,8 @@ class TokenProvider(
     private val applicationProperties: ApplicationProperties,
     private var applicationContext: ApplicationContext
 ) : InitializingBean, ApplicationContextAware {
-    override fun setApplicationContext(ac: ApplicationContext) {
-        applicationContext = ac
+    override fun setApplicationContext(applicationContext: ApplicationContext) {
+        this.applicationContext = applicationContext
     }
 
     private var key: Key? = null
@@ -60,14 +61,14 @@ class TokenProvider(
     @Throws(Exception::class)
     override fun afterPropertiesSet() {
         log.info(this.javaClass.simpleName + ".afterPropertiesSet called")
-//        init()
+        init()
     }
 
     fun init() {
         val keyBytes: ByteArray
         val secret = applicationProperties.security.authentication.jwt.secret!!
-        keyBytes = if (!isEmpty(secret)) {
-            log.warn("Warning: the JWT key used is not Base64-encoded. We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security.")
+        keyBytes = if (!hasLength(secret)) {
+            log.warn("Warning: the JWT key used is not Base64-encoded. We recommend using the `kofu.security.authentication.jwt.base64-secret` key for optimum security.")
             secret.toByteArray(UTF_8)
         } else {
             log.debug("Using a Base64-encoded JWT secret key")
